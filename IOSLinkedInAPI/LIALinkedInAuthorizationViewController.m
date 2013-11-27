@@ -72,7 +72,7 @@ BOOL handlingRedirectURL;
     [self.activityIndicatorView startAnimating];
     [self.view addSubview:self.activityIndicatorView];
 
-    self.authenticationWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.authenticationWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height)];
     self.authenticationWebView.delegate = self;
     self.authenticationWebView.hidden = YES;
     [self.view addSubview:self.authenticationWebView];
