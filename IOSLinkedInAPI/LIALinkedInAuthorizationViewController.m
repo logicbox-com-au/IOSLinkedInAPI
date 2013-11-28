@@ -72,17 +72,30 @@ BOOL handlingRedirectURL;
     [self.activityIndicatorView startAnimating];
     [self.view addSubview:self.activityIndicatorView];
 
-    self.authenticationWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height)];
+    self.authenticationWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 38, self.view.frame.size.width, self.view.frame.size.height)];
     self.authenticationWebView.delegate = self;
     self.authenticationWebView.hidden = YES;
     [self.view addSubview:self.authenticationWebView];
 
     self.navigationController.navigationBarHidden = YES;
+
+}
+
+- (IBAction)close:(id)sender {
+    self.cancelCallback();
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSString *linkedIn = [NSString stringWithFormat:@"https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=%@&scope=%@&state=%@&redirect_uri=%@", self.application.clientId, self.application.grantedAccessString, self.application.state, [self.application.redirectURL LIAEncode]];
     [self.authenticationWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:linkedIn]]];
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:@"Cancel" forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 80, 40);
+    [button addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:button];
+
 }
 
 @end
