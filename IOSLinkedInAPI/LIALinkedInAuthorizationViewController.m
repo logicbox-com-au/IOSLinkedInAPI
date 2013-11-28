@@ -89,13 +89,6 @@ BOOL handlingRedirectURL;
     NSString *linkedIn = [NSString stringWithFormat:@"https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=%@&scope=%@&state=%@&redirect_uri=%@", self.application.clientId, self.application.grantedAccessString, self.application.state, [self.application.redirectURL LIAEncode]];
     [self.authenticationWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:linkedIn]]];
     
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button setTitle:@"Cancel" forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 80, 40);
-    [button addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:button];
-
 }
 
 @end
@@ -153,6 +146,14 @@ BOOL handlingRedirectURL;
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.activityIndicatorView stopAnimating];
     self.authenticationWebView.hidden = NO;
+
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:@"Cancel" forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 80, 40);
+    [button addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:button];
+
 }
 
 @end
