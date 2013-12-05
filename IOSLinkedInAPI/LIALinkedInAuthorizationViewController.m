@@ -72,7 +72,7 @@ BOOL handlingRedirectURL;
     [self.activityIndicatorView startAnimating];
     [self.view addSubview:self.activityIndicatorView];
 
-    self.authenticationWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 38, self.view.frame.size.width, self.view.frame.size.height)];
+    self.authenticationWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height)];
     self.authenticationWebView.delegate = self;
     self.authenticationWebView.hidden = YES;
     [self.view addSubview:self.authenticationWebView];
@@ -147,10 +147,11 @@ BOOL handlingRedirectURL;
     [self.activityIndicatorView stopAnimating];
     self.authenticationWebView.hidden = NO;
 
-    [self.view setBackgroundColor:[UIColor blackColor]];
+    UIImage *redButtonImage = [UIImage imageNamed:@"close_button.png"];
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button setTitle:@"Cancel" forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 80, 40);
+    [button setBackgroundImage:redButtonImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(10, 25, 32, 32);
     [button addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:button];
 
